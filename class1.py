@@ -1,27 +1,27 @@
 #Initializations
-base = 13    # base value
-count = 15  # Total numbers to be printed in your base system
+base = 6    # base value
+count = 30  # Total numbers to be printed in your base system
 new_base = 7  # New Base  one base to another base conversion
-num1 = 1  # First number
-num2 = 20   # Second number
+num1 = 5  # First number
+num2 = 4   # Second number
 num2_base10 = num2
-symbols= "0123456789abcdef"[:base]
+symbols= "0123456789abcdef"
 
 
 #Functions
 def base10_to_baseN(num: int,base: int) -> str:
     val = ''
-    val += symbols[num % base]
+    val = symbols[num % base] + val
     check = num // base
     if check < base:
         if(check == 0):
             return val
-        val += symbols[check]
-        return val[::-1]
+        val = symbols[check] + val
+        return val
     else:
-        recur = base10_to_baseN(check,base)[::-1]
-        val += recur
-        return val[::-1]
+        recur = base10_to_baseN(check,base)
+        val = recur  + val
+        return val
 
 def addition(num1: str,num2: str,base : int) -> str:
     leng = None
@@ -44,7 +44,6 @@ def addition(num1: str,num2: str,base : int) -> str:
     if(carry != 0):
         res = str(carry) + res
     return res
-
 
 
 def multiplication(num1 : int,num2_base10 : int , base : int) -> str :
@@ -117,7 +116,7 @@ print()
 numN1 = base10_to_baseN(num1,base)
 numN2 =  base10_to_baseN(num2,base)
 print(f"converting {num1} to base {base} : {numN1}")
-print(f"converting {num1} to base {base} : {numN2}")
+print(f"converting {num2} to base {base} : {numN2}")
 print(f"addition of {num1} and {num2} in base {base} :"
       f" {addition(numN1,numN2,base)}")
 #
@@ -133,7 +132,7 @@ print(f"converting {multiplication_val} back to base 10 : {base10Converter((
 # #base N to base M conversion
 print(f"converting {multiplication_val} from base {base} to  base {new_base} :\
 {base_n_converter(multiplication_val,base,new_base)}")
-#
+
 print(f"subtracting smaller number from bigger number ({num1},"
       f"{num2}) in base {base} : {base_n_subtract(\
     numN1,numN2,base)}")
