@@ -1,11 +1,17 @@
+import math
 #Initializations
 base = 6    # base value
 count = 30  # Total numbers to be printed in your base system
 new_base = 7  # New Base  one base to another base conversion
 num1 = 5  # First number
+multiplication_table_count = 8
+digits = 4
+number_to_represented_in_base = 1000
 num2 = 4   # Second number
 num2_base10 = num2
 symbols= "0123456789abcdef"
+
+
 
 
 #Functions
@@ -106,6 +112,8 @@ def base_n_subtract(num1, num2, base):
     return ''.join(result[::-1])
 
 
+
+
 # print count of numbers in a number system with base N
 print(f"printing {count} numbers in {base} base")
 for i in range(0, count+1):
@@ -117,6 +125,7 @@ numN1 = base10_to_baseN(num1,base)
 numN2 =  base10_to_baseN(num2,base)
 print(f"converting {num1} to base {base} : {numN1}")
 print(f"converting {num2} to base {base} : {numN2}")
+
 print(f"addition of {num1} and {num2} in base {base} :"
       f" {addition(numN1,numN2,base)}")
 #
@@ -126,8 +135,16 @@ print(f"Multiplication of {num1} and {num2} in base {base} :"
       f" {multiplication_val}")
 #
 # #base 10 Conversion
-print(f"converting {multiplication_val} back to base 10 : {base10Converter((
-    multiplication_val),base)}")
+print(f"converting base 6 1 back to base 10 : {base10Converter((
+    '1'),base)}")
+print(f"converting base 6 10 back to base 10 : {base10Converter((
+    '10'),base)}")
+print(f"converting base 6 20 back to base 10 : {base10Converter((
+    '20'),base)}")
+print(f"converting base 6 30 back to base 10 : {base10Converter((
+    '30'),base)}")
+print(f"converting base 6 100 back to base 10 : {base10Converter((
+    '100'),base)}")
 #
 # #base N to base M conversion
 print(f"converting {multiplication_val} from base {base} to  base {new_base} :\
@@ -136,3 +153,17 @@ print(f"converting {multiplication_val} from base {base} to  base {new_base} :\
 print(f"subtracting smaller number from bigger number ({num1},"
       f"{num2}) in base {base} : {base_n_subtract(\
     numN1,numN2,base)}")
+
+
+for i in range(1,multiplication_table_count + 1):
+    multiplication_val = multiplication(numN1,i, base)
+    print(f"{num1} * {i} in base {base} :"
+      f" {multiplication_val}")
+
+
+print(f"How many numbers can be represented in base {base} ,{digits} digits "
+      f"number: {(base**digits)}")
+
+print(f"You need {(math.ceil(math.log(number_to_represented_in_base,base)))} "
+      f"digits to represent {number_to_represented_in_base} in base {base}")
+
