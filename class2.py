@@ -1,4 +1,6 @@
 #finding the number digits needed to type a number in base B
+import math
+
 num = 500
 base = 7
 
@@ -15,8 +17,8 @@ def are_overlapping_lines(point_1,point_2,point_3,point_4):
 
 
 def are_overlapping_rect(fx1,fy1,fx2,fy2,px1,py1,px2,py2):
-    return ((is_on_line(fx1,fx2,px1) and is_on_line(py1,py2,fy1)) or (
-            is_on_line(px1,px2,fx1) and is_on_line(fy1,fy2,py1)) )
+    return ((is_on_line(fx1,fx2,px1) and is_on_line(fy1,fy2,py1)) or (
+            (is_on_line(fx1,fx2,px2) and is_on_line(fy1,fy2,py2)) ))
 
 def find_required_digits(num,base):
     digit = 1
@@ -24,6 +26,13 @@ def find_required_digits(num,base):
         if(base**digit > num):
             return digit
         digit +=1
+
+
+def find_pgt_len( point1, point2):
+    val = 0
+    for index in range(len(point1)):
+        val += (point1[index] - point2[index]) ** 2
+    return math.sqrt(val)
 
 
 def find_log10_value(num):
@@ -59,20 +68,22 @@ def find_rt(num,power):
             break
     while True:
         mid = (high + low) / 2
-        if num == mid**power:
+        temp = mid**power
+        if num == temp:
             return mid
-        elif num < mid**power and (mid**power - num) > 0.00001:
+        elif num < temp and (temp - num) > 0.00001:
             high = mid
-        elif num > mid**power and (num - mid**power) > 0.00001:
+        elif num > temp and (num - temp) > 0.00001:
             low = mid
         else: return mid
 
 
 
 print(is_on_line(2,1,1.5))
-print(are_overlapping_lines(2,1,3,4))
+print(are_overlapping_lines(-1,-2,-1.5,1))
 print(find_required_digits(num,base))
 print(find_log10_value(1050))
-print(find_rt(64,3))
+print(find_rt(2,2))
 print(find_cube(3))
-print(are_overlapping_rect(1,1,0,0,-2,-2,-1,-1))
+print(are_overlapping_rect(1,2,3,4,3,4,5,6))
+print(find_pgt_len((0,0,0),(3,4,3.33333334)))
