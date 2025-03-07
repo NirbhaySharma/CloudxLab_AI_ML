@@ -59,7 +59,7 @@ def find_cube(num):
 
 def find_rt(num,power):
     low = high = 0
-    for i in range(0,num+1):
+    for i in range(0,int((num+2)//1)):
         if num <= i**power:
             low = i - 1
             high = i
@@ -83,7 +83,8 @@ print(is_on_line(2,1,1.5))
 print(are_overlapping_lines(-1,-2,-1.5,1))
 print(find_required_digits(num,base))
 print(find_log10_value(1050))
-print(find_rt(2,2))
+print("root")
+print(find_rt(0.8,2))
 print(find_cube(3))
 print(are_overlapping_rect(1,2,3,4,3,4,5,6))
 print(find_pgt_len((0,0,0),(3,4,3.33333334)))
