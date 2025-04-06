@@ -1,0 +1,22 @@
+def string_permutations(s):
+    # Base case: if the string is of length 1, return the string itself
+    global count
+    if len(s) == 1:
+        return [s]
+
+    permutations = []
+
+    for i in range(len(s)):
+        current_c = s[i]
+        remaining_str = s[:i] + s[i+1:]
+
+        for perm in string_permutations(remaining_str):
+            if((current_c + perm) in permutations):
+                continue
+            permutations.append(current_c + perm)
+    return permutations
+
+s = "nir"
+val = string_permutations(s)
+print(len(val))
+print(val)
