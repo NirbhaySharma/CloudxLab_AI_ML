@@ -1,7 +1,7 @@
 import math
 
-n = 2
-m = 2
+n = 3
+m = 3
 
 lis = []
 for i in range(0 , n):
@@ -10,8 +10,9 @@ for i in range(0 , n):
 print(lis)
 print_iterations = math.pow(m,n)
 
-def increment_val(lis, power):
+def increment_val(power):
     carry = 1
+    global lis
     for i in range( len(lis)-1,-1,-1):
         if(lis[i] + carry >=power):
             lis[i] = 0
@@ -23,5 +24,5 @@ def increment_val(lis, power):
             return lis
     return lis
 
-for i in range(0,int(print_iterations-1)):
-    print(increment_val(lis,m))
+for i in range(0,int(print_iterations+10)):
+    print(increment_val(m))
