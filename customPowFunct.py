@@ -1,5 +1,5 @@
-num = -2
-power = 10
+num = 0
+power = 5
 
 def multiply(x,y):
     sum = 0
@@ -17,6 +17,8 @@ def multiply(x,y):
 def pow_cust(num, power):
     if power % 1 != 0:
         return -1
+    if power == 0:
+        return 1
     numb = num
     for i in range(0 , power-1):
         numb = multiply(numb,num)
