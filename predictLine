@@ -1,0 +1,98 @@
+from Mean_Squared_error_22Mar import mean_squared_error
+
+lis_x = [1,2,3,4,5,6,7,8,9,10,11,12]
+lis_y = [14,24,34,64,79,94,144,164,184,204,224,244]
+
+
+def calculate_m_andC(x,y):
+    m = []
+    c = []
+    final_m = 0
+    final_c = 0
+    for i in range(int(len(x)/3)):
+        m.append((y[i+1]- y[i])/(x[i+1] - x[i]))
+        c.append(y[i] - (x[i] * (y[i+1]- y[i])/(x[i+1] - x[i])))
+
+    for i in m:
+        final_m +=i
+    final_m = int(final_m/len(m))
+    for i in c:
+        final_c +=i
+    final_c = int(final_c/len(c))
+    predicted_y = calculate_y(x,final_m,final_c)
+    current_meanSq_error = mean_squared_error(y,
+                                                                   predicted_y)
+    tempPred_y_increase = calculate_y(x,final_m+1,final_c)
+    tempPred_y_decrease = calculate_y(x,final_m-1,final_c)
+    increase_meanSq_error = mean_squared_error(y,
+                                                                        tempPred_y_increase)
+    decrease_meanSq_error = mean_squared_error(y,
+                                                                        tempPred_y_decrease)
+    if ((current_meanSq_error < decrease_meanSq_error)  and (
+    current_meanSq_error <
+            increase_meanSq_error)):
+        m = final_m
+    elif (current_meanSq_error > decrease_meanSq_error):
+        m = final_m - 1
+        while(current_meanSq_error > decrease_meanSq_error):
+            current_meanSq_error = decrease_meanSq_error
+            tempPred_y_decrease = calculate_y(x,m-1,final_c)
+            decrease_meanSq_error = mean_squared_error(y,
+                                                                                tempPred_y_decrease)
+            m -=1
+        m+=1
+    else:
+        m = final_m + 1
+        while(current_meanSq_error > increase_meanSq_error):
+            current_meanSq_error = increase_meanSq_error
+            tempPred_y_increase = calculate_y(x,m+1,final_c)
+            increase_meanSq_error = mean_squared_error(y,
+                                                                                tempPred_y_increase)
+            m +=1
+        m-=1
+
+    predicted_y = calculate_y(x,m,final_c)
+    current_meanSq_error = mean_squared_error(y,predicted_y)
+    tempPred_y_increase = calculate_y(x,m,final_c+1)
+    tempPred_y_decrease = calculate_y(x,m,final_c-1)
+    increase_meanSq_error = mean_squared_error(y,tempPred_y_increase)
+    decrease_meanSq_error = mean_squared_error(y,tempPred_y_decrease)
+    if ((current_meanSq_error < decrease_meanSq_error)  and (
+            current_meanSq_error <
+            increase_meanSq_error)):
+        c = final_c
+    elif (current_meanSq_error > decrease_meanSq_error):
+        c = final_c - 1
+        while(current_meanSq_error > decrease_meanSq_error):
+            current_meanSq_error = decrease_meanSq_error
+            tempPred_y_decrease = calculate_y(x,m,c-1)
+            decrease_meanSq_error = mean_squared_error(y,
+                                                                                tempPred_y_decrease)
+            c -=1
+        c+=1
+    else:
+        c = c + 1
+        while(current_meanSq_error > increase_meanSq_error):
+            current_meanSq_error = increase_meanSq_error
+            tempPred_y_increase = calculate_y(x,m,c+1)
+            increase_meanSq_error = mean_squared_error(y,
+                                                                                tempPred_y_increase)
+            c +=1
+        c -=1
+    return (m,c)
+
+def calculate_y(x,m,c):
+    y = []
+    for i in x:
+        y.append( m*i + c)
+    return y
+
+m,c = calculate_m_andC(lis_x,lis_y)
+print(m,c)
+print(lis_y)
+print(calculate_y(lis_x,m,c))
+print(mean_squared_error(calculate_y(lis_x,m,c),lis_y))
+print(mean_squared_error(calculate_y(lis_x,m+1,c),lis_y))
+print(mean_squared_error(calculate_y(lis_x,m-1,c),lis_y))
+print(mean_squared_error(calculate_y(lis_x,m,c+1),lis_y))
+print(mean_squared_error(calculate_y(lis_x,m,c-1),lis_y))
