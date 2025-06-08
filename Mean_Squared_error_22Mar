@@ -1,0 +1,39 @@
+import random
+
+count = 15
+list_one = []
+list_two = []
+
+
+for i in range(count):
+    list_one.append(int(random.random()*10))
+    list_two.append(int(random.random()*10))
+
+def mean_squared_error(seq_1,seq_2):
+    if (len(seq_1) != len(seq_2)):
+        return -1
+    else:
+        sqr_error = 0
+        for ind, val in enumerate(seq_1):
+            sqr_error += (val - seq_2[ind])**2
+        return sqr_error/len(seq_1)
+
+def mean_absolute_error(seq_1,seq_2):
+    if (len(seq_1) != len(seq_2)):
+        return -1
+    else:
+        abs_error = 0
+        for ind, val in enumerate(seq_1):
+            abs_error += abs(val - seq_2[ind])
+        return abs_error/len(seq_1)
+
+
+#print(list_one)
+#print(list_two)
+#print(mean_squared_error(list_one,list_two))
+#print(mean_absolute_error(list_one,list_two))
+
+
+
+
+
