@@ -19,7 +19,7 @@ The dataset consists of **10,000 customer records** from a retail bank. Each ent
 | **HasCrCard**      | Indicates if the customer has a credit card (`1 = Yes`, `0 = No`) |
 | **IsActiveMember** | Indicates if the customer is an active member (`1 = Yes`, `0 = No`) |
 | **EstimatedSalary**| Estimated annual salary |
-| **Exited**         | Target variable — whether the customer left the bank (`1 = Yes`, `0 = No`) |
+| **Exited**         | Target variable — whether the customer Stays with the bank (`1 = Yes`, `0 = No`) |
 
 ### 📁 File Details
 - **Filename:** `Bank_Churn_Data.csv`  
